@@ -2,37 +2,45 @@
   <div>
     <Header></Header>
     <div class="container">
-      <Add :addComments="addComments"></Add>
-      <List :comments="comments" :delComment="delComment"></List>
+      <Add :AddComment="AddComment"></Add>
+      <List :comments="comments" :DelComment="DelComment"></List>
     </div>
   </div>
 </template>
 
 <script>
+import Header from "./components/Header";
 import Add from "./components/Add";
 import List from "./components/List";
-import Header from "./components/Header";
 export default {
   name: "App",
   components:{
+    Header,
     Add,
-    List,
-    Header
+    List
   },
   data(){
     return{
       comments:[
-        {id:1,username:'小红',connect:'第一'},
-        {id:2,username:'小黄',connect:'第二'},
+        {
+          id:1,
+          username:'小红',
+          connect:'熟练使用prop'
+        },
+        {
+          id:2,
+          username:'小黄',
+          connect:'熟练使用prop'
+        },
       ]
     }
   },
   methods:{
-    addComments(comment) {
-      this.comments.unshift(comment);
+    AddComment(obj){
+      this.comments.unshift(obj);
     },
-    delComment(index){
-      this.comments.splice(index,1);
+    DelComment(index){
+      this.comments.splice(index,1)
     }
   }
 }

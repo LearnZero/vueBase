@@ -3,7 +3,7 @@
     <h3 class="reply">评论回复：</h3>
     <h2 style='display: none'>暂无评论，点击左侧添加评论！！！</h2>
     <ul class="list-group">
-      <Item v-for="(item,index) in comments" :comment="item" :index="index" :DelComment="DelComment"></Item>
+      <Item v-for="(item,index) in comments" :key="item.id" :comment="item" :delComment="delComment" :index="index"></Item>
     </ul>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   components:{
     Item
   },
-  props:['comments','DelComment']
+  props:['comments','delComment']
 }
 </script>
 

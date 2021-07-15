@@ -1,9 +1,9 @@
 <template>
   <li class="list-group-item">
     <div class="handle">
-      <a href="javascript:;" @click="delC">删除</a>
+      <a href="javascript:;" @click="delThis()">删除</a>
     </div>
-    <p class="user"><span >{{comment.username}}</span><span>说:</span></p>
+    <p class="user"><span >{{ comment.username }}</span><span>说:</span></p>
     <p class="centence">{{comment.connect}}</p>
   </li>
 </template>
@@ -11,11 +11,11 @@
 <script>
 export default {
   name: "Item",
-  props:['comment','index','DelComment'],
+  props:['comment','index','delComment'],
   methods:{
-    delC(){
-      if (confirm('确认删除？')){
-        this.DelComment(this.index);
+    delThis(){
+      if (confirm("确定删除？")){
+        this.delComment(this.index);
       }
     }
   }

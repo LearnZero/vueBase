@@ -11,7 +11,7 @@
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="button" class="btn btn-default pull-right" @click="addC">提交</button>
+          <button type="button" class="btn btn-default pull-right" @click="addComment">提交</button>
         </div>
       </div>
     </form>
@@ -21,29 +21,29 @@
 <script>
 export default {
   name: "Add",
+  props:['addComments'],
   data(){
     return{
       username:'',
       connect:''
     }
   },
-  props:['AddComment'],
   methods:{
-    addC(){
+    addComment(){
       let {username,connect} = this;
       if (username.trim()&&connect.trim()){
-          let id = Date.now();
-          let obj = {
-            id,
-            username,
-            connect
-          }
-          this.AddComment(obj);
+        let id =Date.now();
+        let obj = {
+          id,
+          username,
+          connect
+        }
+        this.addComments(obj);
       }else{
-        alert('请输入合理的信息！')
+        alert('请输入合法的用户名和内容！')
       }
-      this.username =''
-      this.connect = ''
+      this.username=''
+      this.connect=''
     }
   }
 }
