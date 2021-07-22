@@ -1,51 +1,63 @@
 <template>
-  <div>
-    <Header></Header>
-    <div class="container">
-      <Add :AddComment="AddComment"></Add>
-      <List :comments="comments" :DelComment="DelComment"></List>
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <Header @addTodos="addTodos"></Header>
+      <Main :todos="todos" :delTodos="delTodos"></Main>
+      <Footer :todos="todos" :updateTodos="updateTodos" @deleteAll="deleteAll"></Footer>
     </div>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header";
-import Add from "./components/Add";
-import List from "./components/List";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 export default {
   name: "App",
-  components:{
-    Header,
-    Add,
-    List
-  },
   data(){
     return{
-      comments:[
-        {
-          id:1,
-          username:'小红',
-          connect:'熟练使用prop'
-        },
-        {
-          id:2,
-          username:'小黄',
-          connect:'熟练使用prop'
-        },
-      ]
+        todos:JSON.parse(localStorage.getItem('TODO_KEY'))||[]
+    }
+  },
+  watch:{
+    todos:{
+      deep:true,
+      handler(newVal,oldVal){
+        localStorage.setItem('TODO_KEY',JSON.stringify(newVal))
+      }
     }
   },
   methods:{
-    AddComment(obj){
-      this.comments.unshift(obj);
+    addTodos(todo) {
+      this.todos.unshift(todo);
     },
-    DelComment(index){
-      this.comments.splice(index,1)
+    delTodos(index) {
+      this.todos.splice(index,1);
+    },
+    updateTodos(val){
+      this.todos.forEach(item=>item.isOver=val)
+    },
+    deleteAll(){
+      this.todos = this.todos.filter(item=>!item.isOver)
     }
+  },
+  components:{
+    Header,
+    Main,
+    Footer
   }
 }
 </script>
 
 <style scoped>
-
+/*app*/
+.todo-container {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-container .todo-wrap {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 </style>

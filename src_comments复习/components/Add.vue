@@ -27,7 +27,7 @@ export default {
       connect:''
     }
   },
-  props:['AddComment'],
+  // props:['AddComment'],
   methods:{
     addC(){
       let {username,connect} = this;
@@ -38,7 +38,8 @@ export default {
             username,
             connect
           }
-          this.AddComment(obj);
+          // this.AddComment(obj);
+        this.$emit('AddComment',obj);
       }else{
         alert('请输入合理的信息！')
       }
